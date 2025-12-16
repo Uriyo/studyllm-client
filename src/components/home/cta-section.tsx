@@ -9,17 +9,17 @@ export function CTASection() {
           Ready to Transform How You <span className="text-primary">Learn & Research</span>?
         </h2>
         <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-          Join thousands of researchers, students, and professionals who&asp;ve supercharged their knowledge workflow with
-          NotebookLM.
+          Join thousands of researchers, students, and professionals who have supercharged their knowledge workflow with
+          Ragment.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8">
-            Get Started Free <ArrowRight className="ml-2 h-4 w-4" />
+          <Button size="lg" className="bg-primary border border-primary/20 text-primary-foreground hover:bg-primary/10 cursor-pointer text-base px-8">
+            Get Started<ArrowRight className="h-4 w-4" />
           </Button>
-          <Button size="lg" variant="outline" className="text-base px-8 bg-transparent">
+          {/* <Button size="lg" variant="outline" className="text-base px-8 bg-transparent">
             Talk to Sales
-          </Button>
+          </Button> */}
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground">
@@ -27,13 +27,13 @@ export function CTASection() {
             <Shield className="h-4 w-4 text-primary" />
             <span>Enterprise-grade security</span>
           </div>
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <CreditCard className="h-4 w-4 text-primary" />
             <span>No credit card required</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-2">
             <Users className="h-4 w-4 text-primary" />
-            <span>100K+ active users</span>
+            <span>10K+ users</span>
           </div>
         </div>
       </div>

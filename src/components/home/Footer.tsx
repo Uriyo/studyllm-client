@@ -60,7 +60,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
@@ -68,23 +68,23 @@ export function Footer() {
                   About
                 </Link>
               </li>
-              {/* <li>
+               <li>
                 <Link href="#" className="hover:text-foreground transition-colors">
                   Careers
                 </Link>
-              </li> */}
+              </li> 
               <li>
-                <Link href="#" className="hover:text-foreground transition-colors">
+                 <Link href="#" className="hover:text-foreground transition-colors">
                   Contact
-                </Link>
+                </Link> 
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div className="pt-8 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2025 NotebookLM. All rights reserved.</p>
-          <div className="flex gap-6">
+          <p>© 2025 Ragment. All rights reserved.</p>
+          {/* <div className="flex gap-6">
             <Link href="#" className="hover:text-foreground transition-colors">
               Privacy
             </Link>
@@ -94,7 +94,7 @@ export function Footer() {
             <Link href="#" className="hover:text-foreground transition-colors">
               Security
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

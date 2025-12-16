@@ -30,9 +30,6 @@ export function Header() {
           <Button variant="ghost" size="sm">
             <Link href={'/sign-in'}>Sign In</Link>
           </Button>
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Start Free
-          </Button>
         </div>
       </div>
     </header>

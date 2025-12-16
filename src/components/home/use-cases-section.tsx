@@ -43,7 +43,7 @@ export function UseCasesSection() {
           Built for How <span className="text-primary">You Think</span>
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Whether you&asp;re studying, researching, or creating — NotebookLM adapts to your workflow.
+          Whether you&asp;re studying, researching, or creating — Ragment adapts to your workflow.
         </p>
       </div>
 

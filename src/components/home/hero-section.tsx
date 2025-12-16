@@ -22,9 +22,9 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8">
-            Try NotebookLM Free <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          {/*  <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8">
+           Try NotebookLM<ArrowRight className="ml-2 h-4 w-4" />
+          </Button> */}
           <Button size="lg" variant="outline" className="text-base px-8 bg-transparent">
             <Play className="mr-2 h-4 w-4" /> Watch Demo
           </Button>

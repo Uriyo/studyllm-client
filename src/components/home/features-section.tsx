@@ -5,7 +5,7 @@ const features = [
     icon: Upload,
     title: "Import Any Source",
     description:
-      "Upload documents, videos, podcasts, websites, and more. NotebookLM ingests all formats and extracts meaningful knowledge automatically.",
+      "Upload documents, videos, podcasts, websites, and more. Ragment ingests all formats and extracts meaningful knowledge automatically.",
     tagline: "Universal knowledge ingestion.",
   },
   {
@@ -27,18 +27,18 @@ const features = [
     description: "Create study guides, briefing documents, timelines, and FAQs from your sources with one click.",
     tagline: "Content creation on autopilot.",
   },
-  {
-    icon: Headphones,
-    title: "Audio Overviews",
-    description: "Transform your research into engaging audio summaries. Perfect for learning on the go.",
-    tagline: "Learn while you move.",
-  },
-  {
-    icon: Share2,
-    title: "Collaborate & Share",
-    description: "Share notebooks with your team or make them public. Collaborate on research in real-time.",
-    tagline: "Collective intelligence, unlocked.",
-  },
+//   {
+//     icon: Headphones,
+//     title: "Audio Overviews",
+//     description: "Transform your research into engaging audio summaries. Perfect for learning on the go.",
+//     tagline: "Learn while you move.",
+//   },
+//   {
+//     icon: Share2,
+//     title: "Collaborate & Share",
+//     description: "Share notebooks with your team or make them public. Collaborate on research in real-time.",
+//     tagline: "Collective intelligence, unlocked.",
+//   },
 ]
 
 export function FeaturesSection() {
@@ -53,7 +53,7 @@ export function FeaturesSection() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
         {features.map((feature) => {
           const Icon = feature.icon
           return (
