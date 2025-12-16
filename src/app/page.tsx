@@ -9,9 +9,10 @@ const { userId } = await auth()
 if (userId) {
   redirect("/projects");
 }else{
-  redirect("/sign-in");
+  redirect("/home");
 }
 
 }
 
 export default Home;
+
