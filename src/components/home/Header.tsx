@@ -1,17 +1,17 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Sparkles } from "lucide-react"
+import { Logo } from "../ui/Logo"
 
 export function Header() {
   return (
-    <header className="border-b border-border/50 bg-background/60 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b border-border/50 bg-background text-white backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-primary/10 border border-primary flex items-center justify-center">
-            <Sparkles className="h-5 w-5 text-primary" />
-          </div>
-          <span className="text-xl font-semibold">BaseLLM</span>
+             <Logo />
+          <span className="text-lg ">
+                  <span className=" decoration-2 font-bold underline-offset-2">Rag</span>ment_
+              </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">

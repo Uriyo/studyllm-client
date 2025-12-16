@@ -1,17 +1,17 @@
 import Link from "next/link"
-import { Sparkles } from "lucide-react"
+import { Logo } from "../ui/Logo"
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-background/60">
+    <footer className="border-t border-border/50 bg-background text-white ">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 rounded-lg bg-primary/10 border border-primary flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-primary" />
-              </div>
-              <span className="text-lg font-semibold">BaseLLM</span>
+              <Logo />
+              <span className="text-lg ">
+                  <span className=" decoration-2 font-bold underline-offset-2">Rag</span>ment_
+              </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               AI-powered knowledge assistant for research, learning, and discovery.
