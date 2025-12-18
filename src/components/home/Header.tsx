@@ -1,9 +1,13 @@
-
+'use client'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Logo } from "../ui/Logo"
+import { useClerk } from "@clerk/nextjs"
 
 export function Header() {
+
+  const { user } = useClerk()
+
   return (
     <header className="border-b border-border/50 bg-background text-white backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -28,7 +32,7 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <Button variant="ghost" size="sm">
-            <Link href={'/sign-in'}>Sign In</Link>
+            {user ? <Link href={'/projects'}>Dashboard</Link> : <Link href={'/sign-in'}>Sign In</Link>}
           </Button>
         </div>
       </div>

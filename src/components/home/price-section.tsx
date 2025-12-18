@@ -1,23 +1,47 @@
+"use client"
 import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { useUser} from "@clerk/nextjs"
+import { useState } from "react"
+import { useAuth} from "@clerk/nextjs"
 
-const plans = [
+type Plan = {
+  name: string
+  price: number
+  description: string
+  priceId?: string // only for paid plans
+  features: string[]
+  popular?: boolean
+}
+
+const plans:Plan[] = [
+  {
+    name: "Free",
+    price:0,
+    description:"A simple way to try out AI-powered research and see how it fits your workflow.",
+    features: [
+      "Upload up to 5 sources per notebook",
+      "Up to 3 notebooks",
+      "Basic AI responses"
+    ],
+},
   {
     name: "Hobby",
     price: 5,
+    priceId: "price_1Sfi6LSC6OSw12xOJIdFTYKk",
     description: "Perfect for students and individual learners exploring AI-powered research.",
     features: [
       "Upload up to 50 sources per notebook",
       "Unlimited notebooks",
-      "Audio overviews (up to 10 minutes)",
       "Study guides & summaries",
-      "Basic collaboration",
       "Email support",
     ],
   },
   {
     name: "Pro",
     price: 10,
+    priceId: "price_1Sfi6pSC6OSw12xOTbyvt0dN",
     description: "For professionals and teams who need advanced research capabilities.",
     features: [
       "Unlimited sources per notebook",
@@ -25,16 +49,59 @@ const plans = [
       "Audio overviews (unlimited)",
       "Advanced content generation",
       "Priority AI processing",
-      "Real-time collaboration",
       "Advanced analytics",
       "Priority support",
-      "Custom integrations",
     ],
     popular: true,
   },
 ]
 
+
+
 export function PricingSection() {
+  const router = useRouter()
+  const { user } = useUser()
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
+  const { getToken } = useAuth()
+
+  const handleSubscribe = async (plan:Plan) => {
+    if (!user) {
+      router.push("/sign-up")
+      return
+    }
+     if (!plan.priceId) {
+      router.push("/projects")
+      return
+    }
+  try{
+    setLoadingPlan(plan.name)
+    const token = await getToken()
+    const email=user.primaryEmailAddress?.emailAddress
+
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/stripe/create-checkout-session`,
+        {
+          method: "POST",
+          headers: { 
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json" 
+          },
+          body: JSON.stringify({price_id: plan.priceId, email: email }),
+        }
+      )
+      if (!res.ok) {
+        throw new Error("Failed to create checkout session")
+      }
+      const data = await res.json()
+      window.location.href = data.url
+  }catch(err){
+    console.log(err)
+    throw new Error("Failed to create checkout session")
+  }finally{
+    setLoadingPlan(null)
+  }
+}
+
   return (
     <section id="pricing" className="container mx-auto px-4 py-24 bg-muted/30">
       <div className="text-center mb-16">
@@ -46,7 +113,7 @@ export function PricingSection() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {plans.map((plan) => (
           <div
             key={plan.name}
@@ -73,9 +140,15 @@ export function PricingSection() {
 
             <Button
               size="lg"
-              className={"w-full mb-6 bg-primary/40 text-primary-foreground border  hover:bg-primary/70 cursor-pointer"}
+              disabled={loadingPlan === plan.name}
+              onClick={() =>  handleSubscribe(plan)}
+              className="w-full mb-6 bg-primary/40 text-primary-foreground border  hover:bg-primary/70 cursor-pointer"
             >
-              Get Started
+              {loadingPlan === plan.name
+                ? "Redirecting..."
+                : plan.price === 0
+                ? "Get Started"
+                : "Get Started"}
             </Button>
 
             <div className="space-y-3">
