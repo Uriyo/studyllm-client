@@ -84,17 +84,17 @@ export function Footer() {
 
         <div className="pt-8 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>© 2025 Ragment. All rights reserved.</p>
-          {/* <div className="flex gap-6">
-            <Link href="#" className="hover:text-foreground transition-colors">
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-foreground transition-colors">
               Privacy
             </Link>
-            <Link href="#" className="hover:text-foreground transition-colors">
+            <Link href="/terms" className="hover:text-foreground transition-colors">
               Terms
             </Link>
-            <Link href="#" className="hover:text-foreground transition-colors">
-              Security
+            <Link href="/refund" className="hover:text-foreground transition-colors">
+              Refund Policy
             </Link>
-          </div> */}
+          </div>
         </div>
       </div>
     </footer>
