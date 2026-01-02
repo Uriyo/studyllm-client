@@ -147,7 +147,7 @@ function ProjectPage({ params }: ProjectPageProps) {
       const token = await getToken();
       const chatNumber = Date.now() % 10000;
       const result = await apiClient.post(
-        "/api/chats",
+        "/api/chats/",
         {
           title: `Chat #${chatNumber}`,
           project_id: projectId,
