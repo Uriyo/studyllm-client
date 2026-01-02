@@ -1,6 +1,10 @@
 // API Configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ;
+console.log("API URL =", process.env.NEXT_PUBLIC_API_URL);
 
+if (!API_BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL is not defined");
+}
 // Basic API Client function with authentication support
 
 export const apiClient = {
