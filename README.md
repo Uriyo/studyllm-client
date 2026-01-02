@@ -1,7 +1,9 @@
 # Ragment 
 
 A modern Next.js application that replicates the core functionality of Google's NotebookLM, allowing users to interact with their documents through AI-powered conversations.
-Server Repo - https://github.com/Uriyo/ragment-server.git
+### Server Repo - https://github.com/Uriyo/ragment-server.git
+
+
 
 <img width="1460" height="797" alt="Screenshot 2025-12-17 at 8 52 30 PM" src="https://github.com/user-attachments/assets/d8c009e6-7fe0-47bd-b2bf-65afab4260c0" />
 
