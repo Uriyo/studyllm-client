@@ -71,7 +71,7 @@ function ProjectsPage() {
       const token = await getToken();
 
       const result = await apiClient.post(
-        "/api/projects",
+        "/api/projects/",
         {
           name,
           description,
