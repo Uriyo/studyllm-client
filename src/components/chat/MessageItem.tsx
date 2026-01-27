@@ -1,4 +1,6 @@
-import { ThumbsUp, ThumbsDown, User, Bot } from "lucide-react";
+"use client";
+
+import { ThumbsUp, ThumbsDown, User, Sparkles } from "lucide-react";
 
 interface Message {
   id: string;
@@ -26,23 +28,25 @@ export function MessageItem({ message, onFeedback }: MessageItemProps) {
   });
 
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} group animate-slide-up`}>
-      <div className={`max-w-[85%] ${isUser ? "ml-12" : "mr-12"} relative`}>
+    <div
+      className={`flex ${isUser ? "justify-end" : "justify-start"} group`}
+    >
+      <div className={`max-w-[90%] md:max-w-[85%] ${isUser ? "ml-8" : "mr-8"} relative`}>
         {/* Avatar & Message Container */}
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-2.5">
           {/* Avatar - Only show for assistant */}
           {!isUser && (
-            <div className="flex-shrink-0 w-7 h-7 bg-gradient-to-br from-blue-500/40 to-emerald-500/20 border border-blue-400/40 rounded-lg flex items-center justify-center mt-1 glow-blue transition-all duration-300">
-              <Bot size={14} className="text-blue-300" />
+            <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500/20 to-emerald-500/15 border border-white/10 rounded-xl flex items-center justify-center mt-0.5">
+              <Sparkles size={14} className="text-blue-300" />
             </div>
           )}
 
           {/* Message Bubble */}
           <div
-            className={`rounded-lg p-4 border transition-all duration-300 ${
+            className={`rounded-2xl p-4 transition-all duration-200 ${
               isUser
-                ? "glass-sm bg-blue-500/20 border-blue-400/30 text-blue-50 hover:bg-blue-500/25 hover:border-blue-400/50 shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/30"
-                : "glass-sm bg-white/5 border-white/10 text-gray-100 hover:bg-white/10 hover:border-blue-400/40 group-hover:shadow-lg group-hover:shadow-emerald-500/20"
+                ? "bg-gradient-to-br from-blue-500/20 to-blue-600/15 border border-blue-500/20 text-gray-100"
+                : "bg-white/[0.03] border border-white/[0.06] text-gray-200"
             }`}
           >
             <p className="whitespace-pre-wrap leading-relaxed text-sm">
@@ -52,49 +56,46 @@ export function MessageItem({ message, onFeedback }: MessageItemProps) {
 
           {/* User Avatar - Only show for user */}
           {isUser && (
-            <div className="flex-shrink-0 w-7 h-7 bg-gradient-to-br from-blue-500/40 to-blue-400/20 border border-blue-400/40 rounded-lg flex items-center justify-center mt-1 glow-blue transition-all duration-300">
+            <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500/20 to-blue-600/15 border border-blue-500/20 rounded-xl flex items-center justify-center mt-0.5">
               <User size={14} className="text-blue-300" />
             </div>
           )}
         </div>
 
-        {/* Feedback Buttons - Only show for assistant messages */}
-        {!isUser && (
-          <div className="absolute -bottom-3 right-10 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-1 glass-sm bg-white/10 border-white/20 rounded-lg p-1.5">
-            <button
-              onClick={() => onFeedback?.(message.id, "like")}
-              className="p-1.5 hover:bg-emerald-500/20 hover:border border-emerald-400/30 rounded-md transition-all duration-300 group/btn active:scale-90"
-              title="Like this response"
-            >
-              <ThumbsUp
-                size={12}
-                className="text-gray-400 group-hover/btn:text-emerald-300 transition-colors"
-              />
-            </button>
-            <button
-              onClick={() => onFeedback?.(message.id, "dislike")}
-              className="p-1.5 hover:bg-red-500/20 hover:border border-red-400/30 rounded-md transition-all duration-300 group/btn active:scale-90"
-              title="Dislike this response"
-            >
-              <ThumbsDown
-                size={12}
-                className="text-gray-400 group-hover/btn:text-red-300 transition-colors"
-              />
-            </button>
-          </div>
-        )}
-
-        {/* Timestamp */}
+        {/* Footer: Timestamp and Feedback */}
         <div
-          className={`flex items-center gap-2 mt-2 px-1 ${
-            isUser ? "justify-end" : "justify-start ml-10"
+          className={`flex items-center gap-3 mt-2 px-1 ${
+            isUser ? "justify-end pr-10" : "justify-start pl-10"
           }`}
         >
-          <span className="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="text-xs text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             {time}
           </span>
-          {!isUser && (
-            <div className="w-1 h-1 bg-gradient-to-r from-blue-400 to-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+          {/* Feedback Buttons - Only show for assistant messages */}
+          {!isUser && onFeedback && (
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center gap-1">
+              <button
+                onClick={() => onFeedback(message.id, "like")}
+                className="p-1.5 hover:bg-emerald-500/15 rounded-lg transition-all duration-200 tap-highlight"
+                title="Like this response"
+              >
+                <ThumbsUp
+                  size={14}
+                  className="text-gray-500 hover:text-emerald-400 transition-colors"
+                />
+              </button>
+              <button
+                onClick={() => onFeedback(message.id, "dislike")}
+                className="p-1.5 hover:bg-red-500/15 rounded-lg transition-all duration-200 tap-highlight"
+                title="Dislike this response"
+              >
+                <ThumbsDown
+                  size={14}
+                  className="text-gray-500 hover:text-red-400 transition-colors"
+                />
+              </button>
+            </div>
           )}
         </div>
       </div>

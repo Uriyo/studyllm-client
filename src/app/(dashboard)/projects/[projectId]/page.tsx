@@ -1,10 +1,9 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import { ConversationsList } from "@/components/projects/ConversationsList";
 import { KnowledgeBaseSidebar } from "@/components/projects/KnowledgeBaseSidebar";
 import { FileDetailsModal } from "@/components/projects/FileDetailsModal";
-import { useEffect } from "react";
 import { apiClient } from "@/lib/api";
 import { useAuth } from "@clerk/nextjs";
 import toast from "react-hot-toast";
@@ -12,6 +11,7 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { NotFound } from "@/components/ui/NotFound";
 import { Project, Chat, ProjectDocument, ProjectSettings } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { FileText, X } from "lucide-react";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -44,7 +44,6 @@ function ProjectPage({ params }: ProjectPageProps) {
   const [isCreatingChat, setIsCreatingChat] = useState(false);
 
   // UI states
-
   const [activeTab, setActiveTab] = useState<"documents" | "settings">(
     "documents"
   );
@@ -52,6 +51,20 @@ function ProjectPage({ params }: ProjectPageProps) {
   const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(
     null
   );
+
+  // Mobile bottom sheet state
+  const [isKnowledgeBaseOpen, setIsKnowledgeBaseOpen] = useState(false);
+
+  // Close bottom sheet on desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsKnowledgeBaseOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   /*
     ! Business Logic Functions - Core operations for this project:
@@ -125,18 +138,9 @@ function ProjectPage({ params }: ProjectPageProps) {
 
     return () => clearInterval(pollInterval);
   }, [data.documents, projectId, getToken]);
+
   /*
   ! User Interation functions
-
-  * - handleCreateNewChat: Create a new conversation in this project
-  * - handleDeleteChat: Remove a conversation from the project
-  * - handleChatClick: Navigate to a specific chat
-  * - handleDocumentUpload: Process and add new documents to knowledge base
-  * - handleDocumentDelete: Remove documents from knowledge base
-  * - handleUrlAdd: Add web content to the knowledge base
-  * - handleOpenDocument: Open a specific document
-  * - handleDraftSettings: Update project configuration locally
-  * - handlePublishSettings: Save project settings to the server
   */
 
   const handleCreateNewChat = async () => {
@@ -157,7 +161,6 @@ function ProjectPage({ params }: ProjectPageProps) {
       const savedChat = result.data;
       router.push(`/projects/${projectId}/chats/${savedChat.id}`);
 
-      // Update local state
       setData((prev) => ({
         ...prev,
         chats: [savedChat, ...prev.chats],
@@ -180,7 +183,6 @@ function ProjectPage({ params }: ProjectPageProps) {
 
       await apiClient.delete(`/api/chats/${chatId}`, token);
 
-      // Update local state
       setData((prev) => ({
         ...prev,
         chats: prev.chats.filter((chat) => chat.id !== chatId),
@@ -202,11 +204,8 @@ function ProjectPage({ params }: ProjectPageProps) {
     const token = await getToken();
     const uploadedDocuments: ProjectDocument[] = [];
 
-    // Process all files in parallel
-
     const uploadPromises = files.map(async (file) => {
       try {
-        // Step 1: Get presigned URL
         const uploadData = await apiClient.post(
           `/api/projects/${projectId}/files/upload-url`,
           {
@@ -219,10 +218,8 @@ function ProjectPage({ params }: ProjectPageProps) {
 
         const { upload_url, s3_key } = uploadData.data;
 
-        // Step 2: Upload file to S3
         await apiClient.uploadToS3(upload_url, file);
 
-        // Step 3: Confirm upload to the server (starts background processing)
         const updatedDocument = await apiClient.post(
           `/api/projects/${projectId}/files/confirm`,
           {
@@ -238,8 +235,6 @@ function ProjectPage({ params }: ProjectPageProps) {
     });
 
     await Promise.allSettled(uploadPromises);
-
-    // Update local state with successfully uploaded docuemnts
 
     if (uploadedDocuments.length > 0) {
       setData((prev) => ({
@@ -262,7 +257,6 @@ function ProjectPage({ params }: ProjectPageProps) {
         token
       );
 
-      // Update local state - remove the deleted document
       setData((prev) => ({
         ...prev,
         documents: prev.documents.filter((doc) => doc.id !== documentId),
@@ -290,7 +284,6 @@ function ProjectPage({ params }: ProjectPageProps) {
 
       const newDocument = result.data;
 
-      // Update local state
       setData((prev) => ({
         ...prev,
         documents: [newDocument, ...prev.documents],
@@ -303,20 +296,16 @@ function ProjectPage({ params }: ProjectPageProps) {
   };
 
   const handleOpenDocument = (documentId: string) => {
-    console.log("Open document", documentId);
     setSelectedDocumentId(documentId);
   };
 
-  // Project settings
   const handleDraftSettings = (updates: Partial<ProjectSettings>) => {
     setData((prev) => {
-      // If no settings exist yet, we can't update them
       if (!prev.settings) {
         console.warn("Cannot update settings: not loaded yet");
         return prev;
       }
 
-      // Merge the updates into existing settings
       return {
         ...prev,
         settings: {
@@ -367,33 +356,87 @@ function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <>
-      <div className="flex h-screen bg-[#0d1117] gap-4 p-4">
-        <ConversationsList
-          project={data.project}
-          conversations={data.chats}
-          error={null}
-          loading={false}
-          onCreateNewChat={handleCreateNewChat}
-          onChatClick={handleChatClick}
-          onDeleteChat={handleDeleteChat}
-        />
+      <div className="flex flex-col lg:flex-row h-full bg-[#0a0a0a] overflow-hidden">
+        {/* Main Content - Conversations */}
+        <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+          <ConversationsList
+            project={data.project}
+            conversations={data.chats}
+            error={null}
+            loading={isCreatingChat}
+            onCreateNewChat={handleCreateNewChat}
+            onChatClick={handleChatClick}
+            onDeleteChat={handleDeleteChat}
+          />
+        </div>
 
-        {/* KnowledgeBase Sidebar */}
-        <KnowledgeBaseSidebar
-          activeTab={activeTab}
-          onSetActiveTab={setActiveTab}
-          projectDocuments={data.documents}
-          onDocumentUpload={handleDocumentUpload}
-          onDocumentDelete={handleDocumentDelete}
-          onOpenDocument={handleOpenDocument}
-          onUrlAdd={handleUrlAdd}
-          projectSettings={data.settings}
-          settingsError={null}
-          settingsLoading={false}
-          onUpdateSettings={handleDraftSettings}
-          onApplySettings={handlePublishSettings}
+        {/* Desktop Sidebar */}
+        <div className="hidden lg:block w-80 xl:w-96 border-l border-white/5">
+          <KnowledgeBaseSidebar
+            activeTab={activeTab}
+            onSetActiveTab={setActiveTab}
+            projectDocuments={data.documents}
+            onDocumentUpload={handleDocumentUpload}
+            onDocumentDelete={handleDocumentDelete}
+            onOpenDocument={handleOpenDocument}
+            onUrlAdd={handleUrlAdd}
+            projectSettings={data.settings}
+            settingsError={null}
+            settingsLoading={false}
+            onUpdateSettings={handleDraftSettings}
+            onApplySettings={handlePublishSettings}
+          />
+        </div>
+
+        {/* Mobile Bottom Sheet Toggle */}
+        <button
+          onClick={() => setIsKnowledgeBaseOpen(true)}
+          className="lg:hidden fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 z-30 transition-transform hover:scale-105 active:scale-95"
+          aria-label="Open Knowledge Base"
+        >
+          <FileText size={24} className="text-white" />
+        </button>
+
+        {/* Mobile Bottom Sheet */}
+        <div
+          className={`drawer-overlay lg:hidden ${isKnowledgeBaseOpen ? "open" : ""}`}
+          onClick={() => setIsKnowledgeBaseOpen(false)}
         />
+        <div
+          className={`drawer-bottom lg:hidden ${isKnowledgeBaseOpen ? "open" : ""}`}
+          style={{ height: "85vh" }}
+        >
+          <div className="drawer-handle" />
+          <div className="flex items-center justify-between px-4 pb-2">
+            <h2 className="text-lg font-semibold text-white">Knowledge Base</h2>
+            <button
+              onClick={() => setIsKnowledgeBaseOpen(false)}
+              className="p-2 hover:bg-white/10 rounded-xl transition-colors"
+              aria-label="Close"
+            >
+              <X size={20} className="text-gray-400" />
+            </button>
+          </div>
+          <div className="flex-1 overflow-hidden h-[calc(85vh-60px)]">
+            <KnowledgeBaseSidebar
+              activeTab={activeTab}
+              onSetActiveTab={setActiveTab}
+              projectDocuments={data.documents}
+              onDocumentUpload={handleDocumentUpload}
+              onDocumentDelete={handleDocumentDelete}
+              onOpenDocument={handleOpenDocument}
+              onUrlAdd={handleUrlAdd}
+              projectSettings={data.settings}
+              settingsError={null}
+              settingsLoading={false}
+              onUpdateSettings={handleDraftSettings}
+              onApplySettings={handlePublishSettings}
+              isMobile
+            />
+          </div>
+        </div>
       </div>
+
       {selectedDocument && (
         <FileDetailsModal
           document={selectedDocument}
