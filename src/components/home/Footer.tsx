@@ -40,13 +40,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
+            {/* <h3 className="font-semibold mb-4">Resources</h3> */}
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
+              {/* <li>
                 <Link href="https://github.com/Uriyo/ragment-server/blob/main/README.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                   Documentation
                 </Link>
-              </li>
+              </li> */}
               {/* <li>
                 <Link href="#" className="hover:text-foreground transition-colors">
                   Tutorials
@@ -83,7 +83,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-border/50 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© 2026 Ragment. All rights reserved.</p>
+          <p>© 2026 R_. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-foreground transition-colors">
               Privacy
