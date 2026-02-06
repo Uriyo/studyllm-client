@@ -14,7 +14,7 @@ const Privacy = () => {
       <section className="mb-10">
           <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
           <p className="text-muted-foreground mb-4">
-              At Ragment (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), we take your privacy seriously. This Privacy Policy explains how we
+              At R_ (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), we take your privacy seriously. This Privacy Policy explains how we
               collect, use, disclose, and safeguard your information when you use our AI-powered knowledge assistant service.
           </p>
           <p className="text-muted-foreground mb-4">

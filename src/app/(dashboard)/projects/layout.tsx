@@ -17,7 +17,7 @@ export default function DashboardLayout({
         <div className="flex items-center justify-between px-4 py-3">
           <MobileMenuButton onClick={() => setIsMobileMenuOpen(true)} />
           <h1 className="text-base font-semibold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-            Ragment_
+            R_
           </h1>
           <div className="w-10" /> {/* Spacer for centering */}
         </div>

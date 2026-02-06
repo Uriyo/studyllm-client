@@ -10,7 +10,7 @@ export function CTASection() {
         </h2>
         <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
           Join thousands of researchers, students, and professionals who have supercharged their knowledge workflow with
-          Ragment.
+          R_ .
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

@@ -12,7 +12,7 @@ const Terms = () => {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">1. Agreement to Terms</h2>
         <p className="text-muted-foreground mb-4">
-          By accessing or using Ragment (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). 
+          By accessing or using R_ (&quot;Service&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). 
           If you disagree with any part of the terms, you may not access the Service.
         </p>
       </section>
@@ -20,7 +20,7 @@ const Terms = () => {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">2. Description of Service</h2>
         <p className="text-muted-foreground mb-4">
-          Ragment is an AI-powered knowledge assistant that helps users with research, learning, and discovery. 
+          R_ is an AI-powered knowledge assistant that helps users with research, learning, and discovery. 
           The Service allows users to upload content and receive AI-generated insights, summaries, study guides, and more.
         </p>
       </section>
@@ -104,7 +104,7 @@ const Terms = () => {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">9. Limitation of Liability</h2>
         <p className="text-muted-foreground mb-4">
-          In no event shall Ragment, nor its directors, employees, partners, agents, suppliers, or affiliates, 
+          In no event shall R_, nor its directors, employees, partners, agents, suppliers, or affiliates, 
           be liable for any indirect, incidental, special, consequential, or punitive damages, including without 
           limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access 
           to or use of or inability to access or use the Service.

@@ -10,7 +10,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Logo />
               <span className="text-lg ">
-                  <span className=" decoration-2 font-bold underline-offset-2">Rag</span>ment_
+                  <span className=" decoration-2 font-bold underline-offset-2">R</span>_
               </span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">

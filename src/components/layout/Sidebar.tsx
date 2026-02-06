@@ -68,7 +68,7 @@ export function Sidebar({ isMobileOpen = false, onMobileClose }: SidebarProps) {
         <div className="p-4 flex items-center justify-between">
           {(!isCollapsed || isMobileOpen) && (
             <h1 className="text-lg font-semibold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
-              Ragment_
+              R_
             </h1>
           )}
           

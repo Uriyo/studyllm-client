@@ -14,7 +14,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2">
              <Logo />
           <span className="text-lg ">
-                  <span className=" decoration-2 font-bold underline-offset-2">Rag</span>ment_
+                  <span className=" decoration-2 font-bold underline-offset-2">R</span>_
               </span>
         </Link>
 

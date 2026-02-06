@@ -17,11 +17,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ragment- AI Research Assistant",
-    template: "%s | Ragment_",
+    default: "R_ AI Research Assistant",
+    template: "%s | R_",
   },
   description:
-    "Ragment is an AI-powered research assistant that helps you analyze, organize, and extract insights from documents and web content.",
+    "R_ is an AI-powered research assistant that helps you analyze, organize, and extract insights from documents and web content.",
   keywords: [
     "AI research assistant",
     "LLM research",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
     "AI notes",
     "knowledge management",
   ],
-  authors: [{ name: "Ragment_" }],
-  creator: "Ragment_",
+  authors: [{ name: "R_" }],
+  creator: "R_",
   metadataBase: new URL("https://ragment.in"), 
   alternates: {
     canonical: "/",
@@ -49,17 +49,17 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Ragment_ – AI Research Assistant",
+    title: "R_ – AI Research Assistant",
     description:
       "Your AI research assistant for smarter document understanding and faster insights.",
     url: "https://ragment.in",
-    siteName: "Ragment_",
+    siteName: "R_",
     images: [
       {
         url: "/og-image.png", // add this file in /public
         width: 1200,
         height: 630,
-        alt: "Ragment AI Research Assistant",
+        alt: "R_ AI Research Assistant",
       },
     ],
     locale: "en_US",
@@ -67,11 +67,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ragment_ – AI Research Assistant",
+    title: "R_  AI Research Assistant",
     description:
       "Analyze documents and web content faster using AI-powered research tools.",
     images: ["/og-image.png"],
-    creator: "@ragment", // optional
   },
 
   icons: {

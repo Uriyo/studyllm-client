@@ -5,7 +5,7 @@ const features = [
     icon: Upload,
     title: "Import Any Source",
     description:
-      "Upload documents, videos, podcasts, websites, and more. Ragment ingests all formats and extracts meaningful knowledge automatically.",
+      "Upload documents, videos, podcasts, websites, and more. R_ ingests all formats and extracts meaningful knowledge automatically.",
     tagline: "Universal knowledge ingestion.",
   },
   {

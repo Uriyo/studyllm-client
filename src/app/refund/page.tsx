@@ -12,7 +12,7 @@ const Refund = () => {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">1. Overview</h2>
         <p className="text-muted-foreground mb-4">
-          At Ragment, we want you to be completely satisfied with your purchase. This Refund Policy outlines the 
+          At R_ , we want you to be completely satisfied with your purchase. This Refund Policy outlines the 
           terms and conditions for refunds on our subscription services.
         </p>
       </section>
